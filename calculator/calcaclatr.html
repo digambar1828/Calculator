@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temperature Converter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: auto;
+      }
+
+      .class {
+        margin: 200px 400px;
+        border: 2px solid black;
+        padding: 50px;
+        border-radius: 2cm;
+        background-color: rgba(255, 99, 71, 0.5);
+      }
+
+      input {
+        padding: 10px;
+        margin: 10px;
+        width: 80%;
+        border-radius: 2cm;
+      }
+
+      button {
+        padding: 10px;
+        margin: 10px;
+        cursor: pointer;
+      }
+
+      #result {
+        margin-top: 20px;
+      }
+      #inputTemp {
+        border-radius: 2cm;
+      }
+      #datetime {
+        width: 100px;
+        margin-top: 10px;
+        color: rgb(24, 23, 23);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: sticky;
+        top: 90vh;
+        left: 200vh;
+        border: 2px solid;
+        background-color: bisque;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="class">
+      <h2>Temperature Converter</h2>
+
+      <label for="inputTemp">Enter Temperature:</label>
+      <div>
+        <input type="number" id="inputTemp" placeholder="Enter temperature" />
+
+        <label for="unit"></label
+        ><select id="unit">
+          <option value="celsius">Celsius</option>
+          <option value="fahrenheit">Fahrenheit</option>
+        </select>
+      </div>
+
+      <button
+        class="w3-button w3-white w3-border w3-border-red w3-round-large"
+        onclick="convertTemperature()"
+      >
+        Convert
+      </button>
+
+      <div id="result"></div>
+      <div id="datetime"></div>
+    </div>
+    <script>
+      function convertTemperature() {
+        var inputTemp = document.getElementById("inputTemp").value;
+        var unit = document.getElementById("unit").value;
+
+        if (isNaN(inputTemp) || inputTemp.trim() === "") {
+          inputTemp = 0;
+        } else {
+          inputTemp = parseFloat(inputTemp);
+        }
+
+        var convertedTemp;
+
+        if (unit === "celsius") {
+          convertedTemp = (inputTemp * 9) / 5 + 32;
+          document.getElementById("result").innerHTML =
+            "result " + inputTemp + " °C is " + convertedTemp + " °F.";
+        } else {
+          convertedTemp = ((inputTemp - 32) * 5) / 9;
+          document.getElementById("result").innerHTML =
+            "result " + inputTemp + " °F is " + convertedTemp + " °C.";
+        }
+      }
+      // Function to display current date and time
+      function displayDateTime() {
+        var dateTimeElement = document.getElementById("datetime");
+        var now = new Date();
+        var dateTimeString = now.toLocaleString();
+        dateTimeElement.innerHTML = dateTimeString;
+      }
+
+      // Call the function on page load
+      displayDateTime();
+
+      // Call the function every second using setInterval
+      setInterval(displayDateTime, 1000);
+    </script>
+  </body>
+</html>
